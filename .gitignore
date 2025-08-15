@@ -60,4 +60,10 @@ Thumbs.db
 
 # Application specific
 logs/
-temp/ 
+temp/
+
+# Database files
+*.db
+*.sqlite
+*.sqlite3
+transforma_tasks.db 
