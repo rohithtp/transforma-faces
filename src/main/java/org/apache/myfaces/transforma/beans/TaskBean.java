@@ -1,5 +1,9 @@
 package org.apache.myfaces.transforma.beans;
 
+import org.apache.myfaces.transforma.dao.TaskDAO;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import java.io.Serializable;
@@ -9,6 +13,7 @@ import java.util.List;
 
 /**
  * Managed bean for handling task management in the Transforma-Faces application.
+ * Now uses SQLite database for persistence.
  * 
  * @author Transforma-Faces Team
  * @version 1.0.0
@@ -18,68 +23,106 @@ import java.util.List;
 public class TaskBean implements Serializable {
     
     private static final long serialVersionUID = 1L;
+    private static final Logger logger = LoggerFactory.getLogger(TaskBean.class);
     
     private List<Task> tasks;
     private Task newTask;
     private Task selectedTask;
+    private TaskDAO taskDAO;
     
     /**
-     * Default constructor to initialize tasks list.
+     * Default constructor to initialize TaskDAO and load tasks.
      */
     public TaskBean() {
-        this.tasks = new ArrayList<>();
+        this.taskDAO = new TaskDAO();
         this.newTask = new Task();
-        initializeSampleTasks();
+        loadTasksFromDatabase();
     }
     
     /**
-     * Initialize with some sample tasks for demonstration.
+     * Load tasks from the database.
      */
-    private void initializeSampleTasks() {
-        tasks.add(new Task(1L, "Complete project setup", "Set up the development environment and configure dependencies", "High", "In Progress", new Date()));
-        tasks.add(new Task(2L, "Design user interface", "Create wireframes and mockups for the main application", "Medium", "To Do", new Date()));
-        tasks.add(new Task(3L, "Implement core functionality", "Develop the main business logic and data models", "High", "To Do", new Date()));
-        tasks.add(new Task(4L, "Write unit tests", "Create comprehensive test coverage for all components", "Medium", "To Do", new Date()));
-        tasks.add(new Task(5L, "Documentation", "Write user and developer documentation", "Low", "To Do", new Date()));
+    private void loadTasksFromDatabase() {
+        try {
+            this.tasks = taskDAO.getAllTasks();
+            logger.info("Loaded {} tasks from database", tasks.size());
+        } catch (Exception e) {
+            logger.error("Failed to load tasks from database", e);
+            this.tasks = new ArrayList<>();
+            // Fallback to empty list if database fails
+        }
     }
     
     /**
-     * Add a new task to the list.
+     * Add a new task to the database.
      */
     public void addTask() {
         if (newTask != null && newTask.getTitle() != null && !newTask.getTitle().trim().isEmpty()) {
-            newTask.setId(generateNextId());
-            newTask.setCreatedDate(new Date());
-            tasks.add(newTask);
-            newTask = new Task();
+            try {
+                newTask.setCreatedDate(new Date());
+                Long newId = taskDAO.insertTask(newTask);
+                newTask.setId(newId);
+                
+                // Reload tasks from database to get the latest data
+                loadTasksFromDatabase();
+                
+                // Reset the form
+                newTask = new Task();
+                
+                logger.info("Successfully added new task with ID: {}", newId);
+                
+            } catch (Exception e) {
+                logger.error("Failed to add task", e);
+                // You could add a faces message here to show the error to the user
+            }
         }
     }
     
     /**
-     * Delete a task from the list.
+     * Delete a task from the database.
      */
     public void deleteTask(Task task) {
-        if (task != null) {
-            tasks.remove(task);
+        if (task != null && task.getId() != null) {
+            try {
+                boolean deleted = taskDAO.deleteTask(task.getId());
+                if (deleted) {
+                    // Reload tasks from database
+                    loadTasksFromDatabase();
+                    logger.info("Successfully deleted task with ID: {}", task.getId());
+                } else {
+                    logger.warn("Failed to delete task with ID: {}", task.getId());
+                }
+            } catch (Exception e) {
+                logger.error("Failed to delete task", e);
+            }
         }
     }
     
     /**
-     * Update an existing task.
+     * Update an existing task in the database.
      */
     public void updateTask() {
-        // The task is already updated in the list since it's bound to the UI
-        // This method can be used for additional validation or business logic
+        if (selectedTask != null && selectedTask.getId() != null) {
+            try {
+                boolean updated = taskDAO.updateTask(selectedTask);
+                if (updated) {
+                    // Reload tasks from database
+                    loadTasksFromDatabase();
+                    logger.info("Successfully updated task with ID: {}", selectedTask.getId());
+                } else {
+                    logger.warn("Failed to update task with ID: {}", selectedTask.getId());
+                }
+            } catch (Exception e) {
+                logger.error("Failed to update task", e);
+            }
+        }
     }
     
     /**
-     * Generate the next available ID for new tasks.
+     * Refresh the tasks list from the database.
      */
-    private Long generateNextId() {
-        return tasks.stream()
-                   .mapToLong(Task::getId)
-                   .max()
-                   .orElse(0) + 1;
+    public void refreshTasks() {
+        loadTasksFromDatabase();
     }
     
     // Getters and Setters
