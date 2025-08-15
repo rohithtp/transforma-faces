@@ -21,6 +21,19 @@
         </locale-config>
     </application>
 
+    <!-- Managed Bean Declarations -->
+    <managed-bean>
+        <managed-bean-name>localeBean</managed-bean-name>
+        <managed-bean-class>org.apache.myfaces.transforma.beans.LocaleBean</managed-bean-class>
+        <managed-bean-scope>session</managed-bean-scope>
+    </managed-bean>
+    
+    <managed-bean>
+        <managed-bean-name>taskBean</managed-bean-name>
+        <managed-bean-class>org.apache.myfaces.transforma.beans.TaskBean</managed-bean-class>
+        <managed-bean-scope>session</managed-bean-scope>
+    </managed-bean>
+
     <!-- Lifecycle Configuration -->
     <!-- Phase listener can be added here when needed -->
 
