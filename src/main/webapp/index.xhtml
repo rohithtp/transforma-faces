@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+
+<f:view locale="en">
+    <h:head>
+        <title>Apache MyFaces Transforma</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        
+        <!-- CSS Styles -->
+        <h:outputStylesheet library="css" name="style.css" />
+        
+        <!-- JSF Resource Library -->
+        <h:outputStylesheet library="css" name="primefaces.css" />
+    </h:head>
+
+    <h:body>
+        <div class="container">
+            <!-- Header -->
+            <header class="header">
+                <div class="logo">
+                    <h1>🚀 Transforma-Faces</h1>
+                    <p>Modern JSF with Apache MyFaces</p>
+                </div>
+            </header>
+
+            <!-- Main Content -->
+            <main class="main-content">
+                <div class="welcome-card">
+                    <h2>#{msg['welcome.title']}</h2>
+                    <p>#{msg['welcome.message']}</p>
+                    
+                    <!-- Test LocaleBean with fallback -->
+                    <p><strong>#{msg['welcome.currentLocale']}</strong> 
+                       <h:outputText value="#{localeBean.localeString}" rendered="#{localeBean != null and localeBean.localeString != null}" />
+                       <h:outputText value="en" rendered="#{localeBean == null or localeBean.localeString == null}" />
+                    </p>
+                    
+                    <div class="features-grid">
+                        <div class="feature-item">
+                            <div class="feature-icon">⚡</div>
+                            <h3>#{msg['welcome.highPerformance']}</h3>
+                            <p>#{msg['welcome.highPerformanceDesc']}</p>
+                        </div>
+                        
+                        <div class="feature-item">
+                            <div class="feature-icon">🎨</div>
+                            <h3>#{msg['welcome.modernUI']}</h3>
+                            <p>#{msg['welcome.modernUIDesc']}</p>
+                        </div>
+                        
+                        <div class="feature-item">
+                            <div class="feature-icon">🔧</div>
+                            <h3>#{msg['welcome.developerFriendly']}</h3>
+                            <p>#{msg['welcome.developerFriendlyDesc']}</p>
+                        </div>
+                    </div>
+
+                    <!-- Action Buttons -->
+                    <div class="action-buttons">
+                        <h:form>
+                            <h:commandButton value="#{msg['welcome.getStarted']}" 
+                                           action="welcome" 
+                                           styleClass="btn btn-primary" />
+                            <h:commandButton value="#{msg['welcome.learnMore']}" 
+                                           action="documentation" 
+                                           styleClass="btn btn-secondary" />
+                        </h:form>
+                    </div>
+                </div>
+            </main>
+
+            <!-- Footer -->
+            <footer class="footer">
+                <p>#{msg['welcome.footer']}</p>
+            </footer>
+        </div>
+
+        <!-- JavaScript -->
+        <h:outputScript library="js" name="app.js" />
+    </h:body>
+</f:view>
+</html> 

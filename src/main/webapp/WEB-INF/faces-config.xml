@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<faces-config xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee
+                                  http://xmlns.jcp.org/xml/ns/javaee/web-facesconfig_2_3.xsd"
+              version="2.3">
+
+    <application>
+        <!-- Resource Bundle Configuration -->
+        <resource-bundle>
+            <base-name>org.apache.myfaces.transforma.messages</base-name>
+            <var>msg</var>
+        </resource-bundle>
+        
+        <!-- Locale Configuration -->
+        <locale-config>
+            <default-locale>en</default-locale>
+            <supported-locale>en</supported-locale>
+            <supported-locale>es</supported-locale>
+            <supported-locale>fr</supported-locale>
+        </locale-config>
+    </application>
+
+    <!-- Lifecycle Configuration -->
+    <!-- Phase listener can be added here when needed -->
+
+    <!-- Navigation Rules -->
+    <navigation-rule>
+        <from-view-id>/index.xhtml</from-view-id>
+        <navigation-case>
+            <from-outcome>welcome</from-outcome>
+            <to-view-id>/welcome.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+
+</faces-config> 
