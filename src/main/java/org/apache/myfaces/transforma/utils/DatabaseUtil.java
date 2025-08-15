@@ -10,6 +10,7 @@ import java.io.File;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.sql.ResultSet;
 
 /**
  * Utility class for managing SQLite database connections and initialization.
@@ -107,7 +108,7 @@ public class DatabaseUtil {
             "('Documentation', 'Write user and developer documentation', 'Low', 'To Do', datetime('now'))";
         
         try (Statement stmt = conn.createStatement()) {
-            var rs = stmt.executeQuery(countSQL);
+            ResultSet rs = stmt.executeQuery(countSQL);
             if (rs.next() && rs.getInt(1) == 0) {
                 stmt.execute(insertSQL);
                 logger.info("Sample data inserted");
