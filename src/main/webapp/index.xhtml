@@ -74,6 +74,127 @@
                         </h:form>
                     </div>
                 </div>
+
+                <!-- Task Management Section -->
+                <div class="task-management-card">
+                    <h2>#{msg['task.management']}</h2>
+                    
+                    <!-- Add New Task Form -->
+                    <div class="add-task-form">
+                        <h3>#{msg['task.addNew']}</h3>
+                        <h:form id="addTaskForm">
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="taskTitle">#{msg['task.title']}:</label>
+                                    <h:inputText id="taskTitle" value="#{taskBean.newTask.title}" 
+                                               placeholder="#{msg['task.placeholder.title']}" 
+                                               styleClass="form-input" />
+                                </div>
+                                <div class="form-group">
+                                    <label for="taskPriority">#{msg['task.priority']}:</label>
+                                    <h:selectOneMenu id="taskPriority" value="#{taskBean.newTask.priority}" 
+                                                   styleClass="form-select">
+                                        <f:selectItem itemValue="High" itemLabel="#{msg['task.priority.high']}" />
+                                        <f:selectItem itemValue="Medium" itemLabel="#{msg['task.priority.medium']}" />
+                                        <f:selectItem itemValue="Low" itemLabel="#{msg['task.priority.low']}" />
+                                    </h:selectOneMenu>
+                                </div>
+                                <div class="form-group">
+                                    <label for="taskStatus">#{msg['task.status']}:</label>
+                                    <h:selectOneMenu id="taskStatus" value="#{taskBean.newTask.status}" 
+                                                   styleClass="form-select">
+                                        <f:selectItem itemValue="To Do" itemLabel="#{msg['task.status.todo']}" />
+                                        <f:selectItem itemValue="In Progress" itemLabel="#{msg['task.status.inprogress']}" />
+                                        <f:selectItem itemValue="Done" itemLabel="#{msg['task.status.done']}" />
+                                    </h:selectOneMenu>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group full-width">
+                                    <label for="taskDescription">#{msg['task.description']}:</label>
+                                    <h:inputTextarea id="taskDescription" value="#{taskBean.newTask.description}" 
+                                                   placeholder="#{msg['task.placeholder.description']}" 
+                                                   styleClass="form-textarea" rows="3" />
+                                </div>
+                            </div>
+                            <div class="form-actions">
+                                <h:commandButton value="#{msg['task.save']}" 
+                                               action="#{taskBean.addTask()}" 
+                                               styleClass="btn btn-primary" 
+                                               update="taskTable addTaskForm" />
+                            </div>
+                        </h:form>
+                    </div>
+
+                    <!-- Tasks Table -->
+                    <div class="tasks-table-container">
+                        <h:form id="taskTable">
+                            <h:dataTable value="#{taskBean.tasks}" var="task" 
+                                       styleClass="tasks-table" 
+                                       headerClass="table-header" 
+                                       rowClasses="table-row-odd,table-row-even">
+                                
+                                <h:column>
+                                    <f:facet name="header">ID</f:facet>
+                                    <h:outputText value="#{task.id}" />
+                                </h:column>
+                                
+                                <h:column>
+                                    <f:facet name="header">#{msg['task.title']}</f:facet>
+                                    <h:inputText value="#{task.title}" styleClass="table-input" />
+                                </h:column>
+                                
+                                <h:column>
+                                    <f:facet name="header">#{msg['task.description']}</f:facet>
+                                    <h:inputTextarea value="#{task.description}" styleClass="table-textarea" rows="2" />
+                                </h:column>
+                                
+                                <h:column>
+                                    <f:facet name="header">#{msg['task.priority']}</f:facet>
+                                    <h:selectOneMenu value="#{task.priority}" styleClass="table-select">
+                                        <f:selectItem itemValue="High" itemLabel="#{msg['task.priority.high']}" />
+                                        <f:selectItem itemValue="Medium" itemLabel="#{msg['task.priority.medium']}" />
+                                        <f:selectItem itemValue="Low" itemLabel="#{msg['task.priority.low']}" />
+                                    </h:selectOneMenu>
+                                </h:column>
+                                
+                                <h:column>
+                                    <f:facet name="header">#{msg['task.status']}</f:facet>
+                                    <h:selectOneMenu value="#{task.status}" styleClass="table-select">
+                                        <f:selectItem itemValue="To Do" itemLabel="#{msg['task.status.todo']}" />
+                                        <f:selectItem itemValue="In Progress" itemLabel="#{msg['task.status.inprogress']}" />
+                                        <f:selectItem itemValue="Done" itemLabel="#{msg['task.status.done']}" />
+                                    </h:selectOneMenu>
+                                </h:column>
+                                
+                                <h:column>
+                                    <f:facet name="header">#{msg['task.createdDate']}</f:facet>
+                                    <h:outputText value="#{task.createdDate}">
+                                        <f:convertDateTime pattern="MMM dd, yyyy" />
+                                    </h:outputText>
+                                </h:column>
+                                
+                                <h:column>
+                                    <f:facet name="header">#{msg['task.actions']}</f:facet>
+                                    <div class="action-buttons">
+                                        <h:commandButton value="#{msg['task.save']}" 
+                                                       action="#{taskBean.updateTask()}" 
+                                                       styleClass="btn btn-small btn-primary" />
+                                        <h:commandButton value="#{msg['task.delete']}" 
+                                                       action="#{taskBean.deleteTask(task)}" 
+                                                       styleClass="btn btn-small btn-danger" 
+                                                       update="taskTable" />
+                                    </div>
+                                </h:column>
+                            </h:dataTable>
+                            
+                            <!-- No tasks message -->
+                            <div class="no-tasks-message" rendered="#{empty taskBean.tasks}">
+                                <p>#{msg['task.noTasks']}</p>
+                            </div>
+                        </h:form>
+                    </div>
+                </div>
             </main>
 
             <!-- Footer -->
