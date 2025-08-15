@@ -8,10 +8,7 @@
     <display-name>Apache MyFaces Transforma</display-name>
     <description>A modern Java web application built with Apache MyFaces</description>
 
-    <!-- JSF Context Listener - Required for MyFaces initialization -->
-    <listener>
-        <listener-class>org.apache.myfaces.webapp.StartupServletContextListener</listener-class>
-    </listener>
+
 
     <!-- JSF Servlet Configuration -->
     <servlet>

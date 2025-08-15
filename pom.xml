@@ -17,9 +17,9 @@
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <maven.compiler.source>17</maven.compiler.source>
     <maven.compiler.target>17</maven.compiler.target>
-    <myfaces.version>3.0.2</myfaces.version>
+    <primefaces.version>12.0.0</primefaces.version>
     <jakarta.servlet.version>6.0.0</jakarta.servlet.version>
-    <jakarta.faces.version>3.0.0</jakarta.faces.version>
+    <jakarta.faces.version>4.0.0</jakarta.faces.version>
     <jakarta.el.version>5.0.1</jakarta.el.version>
     <jakarta.activation.version>2.1.2</jakarta.activation.version>
     <junit.version>5.10.1</junit.version>
@@ -30,31 +30,11 @@
     <maven.resources.plugin.version>3.3.1</maven.resources.plugin.version>
     <maven.install.plugin.version>3.1.1</maven.install.plugin.version>
     <maven.deploy.plugin.version>3.1.1</maven.deploy.plugin.version>
-    <tomcat.maven.plugin.version>3.0-alpha-1</tomcat.maven.plugin.version>
+    <cargo.maven.plugin.version>1.10.15</cargo.maven.plugin.version>
   </properties>
 
   <dependencies>
-    <!-- Apache MyFaces Core -->
-    <dependency>
-      <groupId>org.apache.myfaces.core</groupId>
-      <artifactId>myfaces-impl</artifactId>
-      <version>${myfaces.version}</version>
-    </dependency>
-    <dependency>
-      <groupId>org.apache.myfaces.core</groupId>
-      <artifactId>myfaces-api</artifactId>
-      <version>${myfaces.version}</version>
-    </dependency>
-    
-    <!-- Jakarta Servlet API -->
-    <dependency>
-      <groupId>jakarta.servlet</groupId>
-      <artifactId>jakarta.servlet-api</artifactId>
-      <version>${jakarta.servlet.version}</version>
-      <scope>provided</scope>
-    </dependency>
-    
-    <!-- Jakarta Faces API -->
+    <!-- JSF 4.0 API -->
     <dependency>
       <groupId>jakarta.faces</groupId>
       <artifactId>jakarta.faces-api</artifactId>
@@ -62,46 +42,70 @@
       <scope>provided</scope>
     </dependency>
     
-    <!-- Jakarta Expression Language -->
+    <!-- GlassFish Mojarra Implementation for JSF 4.0 -->
     <dependency>
-      <groupId>jakarta.el</groupId>
-      <artifactId>jakarta.el-api</artifactId>
-      <version>${jakarta.el.version}</version>
-      <scope>provided</scope>
+      <groupId>org.glassfish</groupId>
+      <artifactId>jakarta.faces</artifactId>
+      <version>4.0.0</version>
     </dependency>
     
-    <!-- JSTL for JSP support -->
+    <!-- PrimeFaces Component Library -->
     <dependency>
-      <groupId>jakarta.servlet.jsp.jstl</groupId>
-      <artifactId>jakarta.servlet.jsp.jstl-api</artifactId>
-      <version>3.0.0</version>
-    </dependency>
-    <dependency>
-      <groupId>org.glassfish.web</groupId>
-      <artifactId>jakarta.servlet.jsp.jstl</artifactId>
-      <version>3.0.1</version>
+      <groupId>org.primefaces</groupId>
+      <artifactId>primefaces</artifactId>
+      <version>${primefaces.version}</version>
     </dependency>
     
-    <!-- Jakarta Activation -->
+    <!-- Java Servlet API -->
     <dependency>
-      <groupId>jakarta.activation</groupId>
-      <artifactId>jakarta.activation-api</artifactId>
-      <version>${jakarta.activation.version}</version>
-    </dependency>
-    
-    <!-- Jakarta CDI API -->
-    <dependency>
-      <groupId>jakarta.enterprise</groupId>
-      <artifactId>jakarta.enterprise.cdi-api</artifactId>
+      <groupId>javax.servlet</groupId>
+      <artifactId>javax.servlet-api</artifactId>
       <version>4.0.1</version>
       <scope>provided</scope>
     </dependency>
     
-    <!-- Jakarta Inject API -->
+    <!-- Java Expression Language -->
     <dependency>
-      <groupId>jakarta.inject</groupId>
-      <artifactId>jakarta.inject-api</artifactId>
-      <version>2.0.1</version>
+      <groupId>javax.el</groupId>
+      <artifactId>javax.el-api</artifactId>
+      <version>3.0.0</version>
+      <scope>provided</scope>
+    </dependency>
+    
+    <!-- Java Expression Language Implementation -->
+    <dependency>
+      <groupId>org.glassfish</groupId>
+      <artifactId>javax.el</artifactId>
+      <version>3.0.0</version>
+    </dependency>
+    
+    <!-- JSTL for JSP support -->
+    <dependency>
+      <groupId>javax.servlet</groupId>
+      <artifactId>jstl</artifactId>
+      <version>1.2</version>
+    </dependency>
+    
+    <!-- Java Activation -->
+    <dependency>
+      <groupId>javax.activation</groupId>
+      <artifactId>activation</artifactId>
+      <version>1.1.1</version>
+    </dependency>
+    
+    <!-- Java CDI API -->
+    <dependency>
+      <groupId>javax.enterprise</groupId>
+      <artifactId>cdi-api</artifactId>
+      <version>2.0</version>
+      <scope>provided</scope>
+    </dependency>
+    
+    <!-- Java Inject API -->
+    <dependency>
+      <groupId>javax.inject</groupId>
+      <artifactId>javax.inject</artifactId>
+      <version>1</version>
       <scope>provided</scope>
     </dependency>
     
@@ -119,6 +123,7 @@
       <version>${junit.version}</version>
       <scope>test</scope>
     </dependency>
+    
     <dependency>
       <groupId>org.junit.jupiter</groupId>
       <artifactId>junit-jupiter-engine</artifactId>
@@ -163,14 +168,34 @@
     </pluginManagement>
     
     <plugins>
-      <!-- Tomcat Plugin for Development -->
+      <!-- Cargo Plugin for Development with Tomcat 10 -->
       <plugin>
-        <groupId>org.apache.tomcat.maven</groupId>
-        <artifactId>tomcat10-maven-plugin</artifactId>
-        <version>${tomcat.maven.plugin.version}</version>
+        <groupId>org.codehaus.cargo</groupId>
+        <artifactId>cargo-maven3-plugin</artifactId>
+        <version>${cargo.maven.plugin.version}</version>
         <configuration>
-          <port>8080</port>
-          <path>/transforma-faces</path>
+          <container>
+            <containerId>tomcat10x</containerId>
+            <type>embedded</type>
+          </container>
+          <configuration>
+            <type>standalone</type>
+            <properties>
+              <cargo.servlet.port>8080</cargo.servlet.port>
+              <cargo.tomcat.ajp.port>8009</cargo.tomcat.ajp.port>
+              <cargo.jvmargs>-Djakarta.faces.PROJECT_STAGE=Development</cargo.jvmargs>
+            </properties>
+          </configuration>
+          <deployables>
+            <deployable>
+              <groupId>${project.groupId}</groupId>
+              <artifactId>${project.artifactId}</artifactId>
+              <type>war</type>
+              <properties>
+                <context>transforma-faces</context>
+              </properties>
+            </deployable>
+          </deployables>
         </configuration>
       </plugin>
       
