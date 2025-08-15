@@ -1,8 +1,8 @@
 package org.apache.myfaces.transforma;
 
 import org.apache.myfaces.transforma.beans.LocaleBean;
-import org.junit.Test;
-import static org.junit.Assert.*;
+import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.Locale;
 
@@ -17,13 +17,13 @@ public class LocaleBeanTest {
     @Test
     public void testLocaleBeanCreation() {
         LocaleBean bean = new LocaleBean();
-        assertNotNull("LocaleBean should not be null", bean);
+        assertNotNull(bean, "LocaleBean should not be null");
     }
     
     @Test
     public void testDefaultLocale() {
         LocaleBean bean = new LocaleBean();
-        assertEquals("Default locale should be English", Locale.ENGLISH, bean.getLocale());
+        assertEquals(Locale.ENGLISH, bean.getLocale(), "Default locale should be English");
     }
     
     @Test
@@ -33,18 +33,18 @@ public class LocaleBeanTest {
         
         // Test setting locale without FacesContext (for unit testing)
         bean.setLocale(spanish);
-        assertEquals("Locale should be changed to Spanish", spanish, bean.getLocale());
+        assertEquals(spanish, bean.getLocale(), "Locale should be changed to Spanish");
     }
     
     @Test
     public void testLanguageCode() {
         LocaleBean bean = new LocaleBean();
-        assertEquals("Language code should be 'en'", "en", bean.getLanguage());
+        assertEquals("en", bean.getLanguage(), "Language code should be 'en'");
     }
     
     @Test
     public void testCountryCode() {
         LocaleBean bean = new LocaleBean();
-        assertEquals("Country code should be empty for default locale", "", bean.getCountry());
+        assertEquals("", bean.getCountry(), "Country code should be empty for default locale");
     }
 } 

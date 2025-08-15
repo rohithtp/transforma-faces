@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="https://jakarta.ee/xml/ns/jakartaee/jsf/html"
+      xmlns:f="https://jakarta.ee/xml/ns/jakartaee/jsf/core"
+      xmlns:ui="https://jakarta.ee/xml/ns/jakartaee/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+
+<f:view locale="en">
+    <h:head>
+        <title>Documentation - Apache MyFaces Transforma</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        
+        <!-- CSS Styles -->
+        <h:outputStylesheet library="css" name="style.css" />
+        
+        <!-- JSF Resource Library -->
+        <h:outputStylesheet library="css" name="primefaces.css" />
+    </h:head>
+
+    <h:body>
+        <div class="container">
+            <!-- Header -->
+            <header class="header">
+                <div class="logo">
+                    <h1>🚀 Transforma-Faces</h1>
+                    <p>Modern JSF with Apache MyFaces</p>
+                </div>
+                <nav class="nav">
+                    <h:link outcome="index" value="Home" styleClass="nav-link" />
+                    <h:link outcome="welcome" value="Welcome" styleClass="nav-link" />
+                    <h:link outcome="documentation" value="Documentation" styleClass="nav-link active" />
+                </nav>
+            </header>
+
+            <!-- Main Content -->
+            <main class="main-content">
+                <div class="doc-hero">
+                    <h1>Documentation</h1>
+                    <p class="hero-subtitle">Complete guide to building applications with Transforma-Faces</p>
+                </div>
+
+                <!-- Table of Contents -->
+                <section class="toc-section">
+                    <h2>Table of Contents</h2>
+                    <div class="toc-grid">
+                        <div class="toc-item">
+                            <h3>1. Quick Start</h3>
+                            <ul>
+                                <li>Installation</li>
+                                <li>First Application</li>
+                                <li>Configuration</li>
+                            </ul>
+                        </div>
+                        <div class="toc-item">
+                            <h3>2. Core Concepts</h3>
+                            <ul>
+                                <li>JSF Lifecycle</li>
+                                <li>Managed Beans</li>
+                                <li>Navigation</li>
+                            </ul>
+                        </div>
+                        <div class="toc-item">
+                            <h3>3. Components</h3>
+                            <ul>
+                                <li>HTML Components</li>
+                                <li>Core Components</li>
+                                <li>PrimeFaces Integration</li>
+                            </ul>
+                        </div>
+                        <div class="toc-item">
+                            <h3>4. Advanced Topics</h3>
+                            <ul>
+                                <li>Custom Components</li>
+                                <li>Validation</li>
+                                <li>Internationalization</li>
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Quick Start Section -->
+                <section class="doc-section">
+                    <h2>Quick Start Guide</h2>
+                    
+                    <div class="code-example">
+                        <h3>1. Prerequisites</h3>
+                        <ul>
+                            <li>Java 8 or higher</li>
+                            <li>Maven 3.6 or higher</li>
+                            <li>Your favorite IDE (IntelliJ IDEA, Eclipse, VS Code)</li>
+                        </ul>
+                    </div>
+
+                    <div class="code-example">
+                        <h3>2. Project Setup</h3>
+                        <p>Clone the repository and navigate to the project directory:</p>
+                        <pre><code>git clone https://github.com/apache/myfaces-transforma.git
+cd transforma-faces
+mvn clean install</code></pre>
+                    </div>
+
+                    <div class="code-example">
+                        <h3>3. Run the Application</h3>
+                        <p>Start the embedded Jetty server:</p>
+                        <pre><code>mvn jetty:run</code></pre>
+                        <p>Open your browser and navigate to: <code>http://localhost:8080</code></p>
+                    </div>
+                </section>
+
+                <!-- Core Concepts Section -->
+                <section class="doc-section">
+                    <h2>Core Concepts</h2>
+                    
+                    <div class="concept-item">
+                        <h3>JSF Lifecycle</h3>
+                        <p>JavaServer Faces follows a well-defined lifecycle:</p>
+                        <ol>
+                            <li><strong>Restore View:</strong> Rebuilds the component tree</li>
+                            <li><strong>Apply Request Values:</strong> Updates component values</li>
+                            <li><strong>Process Validations:</strong> Validates input data</li>
+                            <li><strong>Update Model Values:</strong> Updates backing beans</li>
+                            <li><strong>Invoke Application:</strong> Executes business logic</li>
+                            <li><strong>Render Response:</strong> Generates the response</li>
+                        </ol>
+                    </div>
+
+                    <div class="concept-item">
+                        <h3>Managed Beans</h3>
+                        <p>Managed beans are Java classes that are managed by the JSF framework:</p>
+                        <pre><code>@Named
+@RequestScoped
+public class UserBean {
+    private String name;
+    
+    public String getName() { return name; }
+    public void setName(String name) { this.name = name; }
+}</code></pre>
+                    </div>
+                </section>
+
+                <!-- Components Section -->
+                <section class="doc-section">
+                    <h2>JSF Components</h2>
+                    
+                    <div class="component-example">
+                        <h3>HTML Components</h3>
+                        <p>Basic form components for user input:</p>
+                        <pre><code>&lt;h:form&gt;
+    &lt;h:inputText value="#{userBean.name}" /&gt;
+    &lt;h:commandButton value="Submit" action="#{userBean.save}" /&gt;
+&lt;/h:form&gt;</code></pre>
+                    </div>
+
+                    <div class="component-example">
+                        <h3>Core Components</h3>
+                        <p>Advanced components for complex functionality:</p>
+                        <pre><code>&lt;f:validateBean&gt;
+    &lt;h:inputText value="#{userBean.email}"&gt;
+        &lt;f:validateRegex pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}" /&gt;
+    &lt;/h:inputText&gt;
+&lt;/f:validateBean&gt;</code></pre>
+                    </div>
+                </section>
+
+                <!-- Navigation Section -->
+                <section class="doc-section">
+                    <h2>Navigation</h2>
+                    
+                    <p>JSF provides declarative navigation through faces-config.xml:</p>
+                    <pre><code>&lt;navigation-rule&gt;
+    &lt;from-view-id&gt;/index.xhtml&lt;/from-view-id&gt;
+    &lt;navigation-case&gt;
+        &lt;from-outcome&gt;success&lt;/from-outcome&gt;
+        &lt;to-view-id&gt;/welcome.xhtml&lt;/to-view-id&gt;
+    &lt;/navigation-case&gt;
+&lt;/navigation-rule&gt;</code></pre>
+                </section>
+
+                <!-- Call to Action -->
+                <section class="cta-section">
+                    <h2>Need More Help?</h2>
+                    <p>Explore the examples, check the API documentation, or join our community!</p>
+                    
+                    <div class="action-buttons">
+                        <h:form>
+                            <h:commandButton value="Back to Welcome" 
+                                           action="welcome" 
+                                           styleClass="btn btn-secondary" />
+                            <h:commandButton value="Go to Home" 
+                                           action="index" 
+                                           styleClass="btn btn-primary" />
+                        </h:form>
+                    </div>
+                </section>
+            </main>
+
+            <!-- Footer -->
+            <footer class="footer">
+                <p>#{msg['welcome.footer']}</p>
+            </footer>
+        </div>
+
+        <!-- JavaScript -->
+        <h:outputScript library="js" name="app.js" />
+    </h:body>
+</f:view>
+</html> 

@@ -1,8 +1,8 @@
 package org.apache.myfaces.transforma.beans;
 
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.SessionScoped;
-import javax.faces.context.FacesContext;
+import jakarta.enterprise.context.SessionScoped;
+import jakarta.faces.context.FacesContext;
+import jakarta.inject.Named;
 import java.io.Serializable;
 import java.util.Locale;
 
@@ -12,7 +12,7 @@ import java.util.Locale;
  * @author Transforma-Faces Team
  * @version 1.0.0
  */
-@ManagedBean
+@Named
 @SessionScoped
 public class LocaleBean implements Serializable {
     

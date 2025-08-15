@@ -1,50 +1,59 @@
 # Apache MyFaces Transforma
 
-A modern Java web application built with Apache MyFaces, providing a robust foundation for JSF-based web development.
+A modern Java web application built with Apache MyFaces, showcasing the latest technologies and best practices.
 
-## 🚀 Project Overview
+## 🚀 Recent Major Upgrades
 
-Transforma-Faces is a web application framework that leverages Apache MyFaces to deliver high-performance, scalable JavaServer Faces applications. This project serves as a foundation for building enterprise-grade web applications with modern JSF capabilities.
+This project has been upgraded to use the latest versions of all components and libraries:
 
-## ✨ Features
+### Core Technologies
+- **Java**: Upgraded from Java 8 to **Java 17** (Latest LTS)
+- **Jakarta EE**: Migrated from Java EE 3.0 to **Jakarta EE 9**
+- **JSF**: Upgraded from JSF 2.2 to **JSF 3.0**
+- **MyFaces**: Upgraded from MyFaces 2.2.18 to **MyFaces 3.0.2**
 
-- **Apache MyFaces 2.3+**: Stable JSF implementation with enhanced performance
-- **Maven-based**: Standardized build and dependency management
-- **Modern Web Standards**: HTML5, CSS3, and JavaScript support
-- **Responsive Design**: Mobile-first approach with modern UI components
-- **Modular Architecture**: Clean separation of concerns and maintainable code structure
+### Dependencies
+- **Jakarta Servlet**: 6.0.0 (Latest)
+- **Jakarta Faces**: 3.0.2 (Latest)
+- **Jakarta Expression Language**: 5.0.1 (Latest)
+- **Jakarta CDI**: 4.0.1 (Latest)
+- **Jakarta Inject**: 2.0.1 (Latest)
+- **JUnit**: Upgraded from JUnit 4 to **JUnit 5.10.1**
+
+### Maven Plugins
+- **Maven Compiler Plugin**: 3.11.0 (Latest)
+- **Maven War Plugin**: 3.4.0 (Latest)
+- **Maven Surefire Plugin**: 3.2.2 (Latest)
+- **Maven Clean Plugin**: 3.3.2 (Latest)
+- **Maven Resources Plugin**: 3.3.1 (Latest)
+- **Tomcat Maven Plugin**: 3.0-alpha-1 (Latest)
 
 ## 🛠️ Prerequisites
 
-- **Java**: JDK 8 or higher
-- **Maven**: 3.6.0 or higher
-- **Servlet Container**: Apache Tomcat 9.0+, WildFly, or similar
-- **IDE**: IntelliJ IDEA, Eclipse, or VS Code with Java extensions
+- **Java**: 17 or higher
+- **Maven**: 3.6 or higher
+- **Application Server**: Tomcat 10+ (Jakarta EE 9 compatible)
 
-## 📦 Installation & Setup
+## 🚀 Quick Start
 
-### 1. Clone the Repository
+1. **Clone the repository**
+   ```bash
+   git clone <repository-url>
+   cd transforma-faces
+   ```
 
-```bash
-git clone <repository-url>
-cd transforma-faces
-```
+2. **Build the project**
+   ```bash
+   mvn clean install
+   ```
 
-### 2. Build the Project
+3. **Run with Tomcat Maven Plugin**
+   ```bash
+   mvn tomcat10:run
+   ```
 
-```bash
-mvn clean install
-```
-
-### 3. Run the Application
-
-```bash
-mvn tomcat7:run
-```
-
-The application will be available at: `http://localhost:8080/transforma-faces`
-
-**Note**: The Tomcat plugin is now configured in the pom.xml, so this command will work directly.
+4. **Access the application**
+   Open your browser and navigate to: `http://localhost:8080/transforma-faces`
 
 ## 🏗️ Project Structure
 
@@ -52,119 +61,80 @@ The application will be available at: `http://localhost:8080/transforma-faces`
 transforma-faces/
 ├── src/
 │   ├── main/
-│   │   ├── java/
+│   │   ├── java/                    # Java source files
 │   │   │   └── org/apache/myfaces/transforma/
-│   │   │       ├── beans/          # Managed beans
-│   │   │       ├── components/     # Custom JSF components
-│   │   │       ├── converters/     # Custom converters
-│   │   │       ├── validators/     # Custom validators
-│   │   │       └── utils/          # Utility classes
-│   │   ├── resources/
-│   │   │   ├── css/               # Stylesheets
-│   │   │   ├── js/                # JavaScript files
-│   │   │   └── images/            # Image assets
-│   │   └── webapp/
+│   │   │       └── beans/
+│   │   │           └── LocaleBean.java
+│   │   ├── resources/               # Resource files
+│   │   │   └── org/apache/myfaces/transforma/
+│   │   │       └── messages.properties
+│   │   └── webapp/                  # Web application files
 │   │       ├── WEB-INF/
-│   │       │   ├── faces-config.xml
-│   │       │   ├── web.xml
-│   │       │   └── beans.xml
-│   │       ├── index.xhtml
-│   │       └── resources/
-│   └── test/
-│       ├── java/                  # Test classes
-│       └── resources/             # Test resources
-├── pom.xml                        # Maven configuration
-├── README.md                      # This file
-└── .gitignore                     # Git ignore rules
+│   │       │   ├── web.xml         # Jakarta EE 9 configuration
+│   │       │   ├── faces-config.xml # JSF 3.0 configuration
+│   │       │   └── beans.xml       # CDI configuration
+│   │       ├── index.xhtml         # Main page
+│   │       ├── welcome.xhtml       # Welcome page
+│   │       └── documentation.xhtml # Documentation page
+│   └── test/                       # Test files
+│       └── java/
+│           └── org/apache/myfaces/transforma/
+│               └── LocaleBeanTest.java
+├── pom.xml                         # Maven configuration
+└── README.md                       # This file
 ```
 
-## 🔧 Configuration
+## 🔧 Key Features
 
-### Maven Dependencies
+- **Modern Architecture**: Built with Jakarta EE 9 and JSF 3.0
+- **CDI Integration**: Uses Contexts and Dependency Injection
+- **Internationalization**: Multi-language support (English, Spanish, French)
+- **Responsive Design**: Modern, mobile-friendly UI
+- **Testing**: Comprehensive JUnit 5 test coverage
 
-The project includes essential MyFaces dependencies:
+## 🌐 Internationalization
 
-```xml
-<dependency>
-    <groupId>org.apache.myfaces.core</groupId>
-    <artifactId>myfaces-impl</artifactId>
-    <version>2.3.9</version>
-</dependency>
-<dependency>
-    <groupId>org.apache.myfaces.core</groupId>
-    <artifactId>myfaces-api</artifactId>
-    <version>2.3.9</version>
-</dependency>
-```
+The application supports multiple languages:
+- English (en) - Default
+- Spanish (es)
+- French (fr)
 
-### JSF Configuration
+Language switching is handled by the `LocaleBean` managed bean.
 
-The `faces-config.xml` file configures JSF behavior and custom components.
+## 🧪 Testing
 
-### Web Configuration
-
-The `web.xml` file configures servlet mappings and application settings.
-
-## 🚀 Development
-
-### Adding New Features
-
-1. **Create Managed Beans**: Add new beans in the `beans` package
-2. **Custom Components**: Develop reusable components in the `components` package
-3. **Business Logic**: Implement business logic in appropriate service classes
-4. **UI Updates**: Modify XHTML files and add corresponding CSS/JS
-
-### Code Style Guidelines
-
-- Follow Java naming conventions
-- Use meaningful variable and method names
-- Add comprehensive JavaDoc comments
-- Implement proper error handling
-- Write unit tests for new functionality
-
-### Testing
-
+Run tests with:
 ```bash
-# Run unit tests
 mvn test
-
-# Run integration tests
-mvn verify
-
-# Generate test coverage report
-mvn jacoco:report
 ```
+
+The project uses JUnit 5 for testing with the latest assertions and testing features.
 
 ## 📚 Documentation
 
-- [Apache MyFaces Documentation](https://myfaces.apache.org/)
-- [JSF Specification](https://jakarta.ee/specifications/faces/)
-- [Maven Documentation](https://maven.apache.org/guides/)
+- **JSF 3.0**: [Jakarta Faces Specification](https://jakarta.ee/specifications/faces/)
+- **MyFaces**: [Apache MyFaces Documentation](https://myfaces.apache.org/)
+- **Jakarta EE**: [Jakarta EE Platform](https://jakarta.ee/)
 
 ## 🤝 Contributing
 
 1. Fork the repository
-2. Create a feature branch (`git checkout -b feature/amazing-feature`)
-3. Commit your changes (`git commit -m 'Add amazing feature'`)
-4. Push to the branch (`git push origin feature/amazing-feature`)
-5. Open a Pull Request
+2. Create a feature branch
+3. Make your changes
+4. Add tests for new functionality
+5. Submit a pull request
 
 ## 📄 License
 
-This project is licensed under the Apache License 2.0 - see the [LICENSE](LICENSE) file for details.
+This project is licensed under the Apache License 2.0.
 
 ## 🆘 Support
 
-- **Issues**: Report bugs and feature requests via GitHub Issues
-- **Discussions**: Join community discussions on GitHub Discussions
-- **Documentation**: Check the project wiki for detailed guides
-
-## 🔄 Version History
-
-- **v1.0.0** - Initial project setup with Apache MyFaces foundation
-- **v1.1.0** - Added custom components and enhanced UI
-- **v1.2.0** - Performance improvements and bug fixes
+For issues and questions:
+- Check the [documentation](https://myfaces.apache.org/)
+- Join the [MyFaces community](https://myfaces.apache.org/community.html)
+- Report issues on the project's issue tracker
 
 ---
 
-**Built with ❤️ using Apache MyFaces** 
+**Built with ❤️ using the latest Jakarta EE and Apache MyFaces technologies** 
