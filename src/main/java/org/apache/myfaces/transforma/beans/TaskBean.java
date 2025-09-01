@@ -18,8 +18,6 @@ import java.util.List;
  * @author Transforma-Faces Team
  * @version 1.0.0
  */
-@ManagedBean
-@SessionScoped
 public class TaskBean implements Serializable {
     
     private static final long serialVersionUID = 1L;
@@ -50,6 +48,15 @@ public class TaskBean implements Serializable {
             logger.error("Failed to load tasks from database", e);
             this.tasks = new ArrayList<>();
             // Fallback to empty list if database fails
+        }
+    }
+    
+    /**
+     * Ensure tasks list is initialized.
+     */
+    private void ensureTasksInitialized() {
+        if (this.tasks == null) {
+            loadTasksFromDatabase();
         }
     }
     
@@ -127,6 +134,7 @@ public class TaskBean implements Serializable {
     
     // Getters and Setters
     public List<Task> getTasks() {
+        ensureTasksInitialized();
         return tasks;
     }
     

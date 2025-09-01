@@ -113,6 +113,22 @@
       <version>4.13.2</version>
       <scope>test</scope>
     </dependency>
+    
+    <!-- Mockito for mocking -->
+    <dependency>
+      <groupId>org.mockito</groupId>
+      <artifactId>mockito-core</artifactId>
+      <version>4.5.1</version>
+      <scope>test</scope>
+    </dependency>
+    
+    <!-- H2 Database for testing -->
+    <dependency>
+      <groupId>com.h2database</groupId>
+      <artifactId>h2</artifactId>
+      <version>2.1.214</version>
+      <scope>test</scope>
+    </dependency>
   </dependencies>
 
   <build>
@@ -172,6 +188,20 @@
           <target>8</target>
         </configuration>
       </plugin>
+      
+      <!-- Surefire Report Plugin for HTML Reports -->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-surefire-report-plugin</artifactId>
+        <version>3.0.0</version>
+        <configuration>
+          <showSuccess>true</showSuccess>
+          <linkXRef>false</linkXRef>
+          <outputDirectory>${project.build.directory}/surefire-reports</outputDirectory>
+        </configuration>
+      </plugin>
+      
+
     </plugins>
   </build>
 </project>

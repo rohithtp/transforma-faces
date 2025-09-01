@@ -5,6 +5,7 @@ import org.apache.myfaces.transforma.utils.DatabaseUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.io.Serializable;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -15,7 +16,7 @@ import java.util.List;
  * @author Transforma-Faces Team
  * @version 1.0.0
  */
-public class TaskDAO {
+public class TaskDAO implements Serializable {
     
     private static final Logger logger = LoggerFactory.getLogger(TaskDAO.class);
     
