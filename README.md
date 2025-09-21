@@ -23,28 +23,13 @@ Transforma-Faces is a web application framework that leverages Apache MyFaces to
 
 ## 📦 Installation & Setup
 
-### 1. Clone the Repository
+For detailed installation and execution steps, see the [EXECUTION.md](EXECUTION.md) guide.
 
-```bash
-git clone <repository-url>
-cd transforma-faces
-```
-
-### 2. Build the Project
-
-```bash
-mvn clean install
-```
-
-### 3. Run the Application
-
-```bash
-mvn tomcat7:run
-```
-
-The application will be available at: `http://localhost:8080/transforma-faces`
-
-**Note**: The Tomcat plugin is now configured in the pom.xml, so this command will work directly.
+**Quick Start:**
+1. Clone the repository: `git clone <repository-url> && cd transforma-faces`
+2. Build the project: `mvn clean install`
+3. Run the application: `mvn tomcat7:run`
+4. Access at: `http://localhost:8080/transforma-faces`
 
 ## 🏗️ Project Structure
 
@@ -124,8 +109,11 @@ The `web.xml` file configures servlet mappings and application settings.
 
 ### Testing
 
+For comprehensive testing instructions and commands, see the [EXECUTION.md](EXECUTION.md) guide.
+
+**Quick Test Commands:**
 ```bash
-# Run unit tests
+# Run all tests
 mvn test
 
 # Run integration tests
@@ -137,6 +125,7 @@ mvn jacoco:report
 
 ## 📚 Documentation
 
+- **[EXECUTION.md](EXECUTION.md)** - Complete execution and testing guide
 - [Apache MyFaces Documentation](https://myfaces.apache.org/)
 - [JSF Specification](https://jakarta.ee/specifications/faces/)
 - [Maven Documentation](https://maven.apache.org/guides/)
